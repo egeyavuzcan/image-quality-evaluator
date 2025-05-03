@@ -12,13 +12,12 @@ import torch.nn as nn
 from torchvision import models, transforms
 from PIL import Image, UnidentifiedImageError
 from pathlib import Path
-import sys
 
 # --- Configuration ---
 
-# Determine Project Root Directory dynamically
-# Assuming this script is in 'image-quality-evaluator/test/'
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
+# Determine Project Root Directory dynamically (still needed for default model path)
+# Assuming this script is in 'src/image_quality_evaluator/test/'
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 
 # Default path to the saved model (relative to project root)
 DEFAULT_MODEL_PATH = PROJECT_ROOT / "output" / "best_quality_model.pth"
@@ -29,6 +28,8 @@ IMAGE_SIZE = 256
 DROPOUT_RATE = 0.5 # Ensure this matches the dropout used during training
 
 # --- Helper Functions ---
+
+from ..utils.utils import preprocess_image # Import the shared function
 
 def load_model(model_path, device):
     """Loads the trained ResNet50 model with the correct final layer."""
@@ -74,33 +75,6 @@ def load_model(model_path, device):
     model = model.to(device)
     model.eval() # Set model to evaluation mode
     return model
-
-def preprocess_image(image_path, image_size, device):
-    """Loads, preprocesses, and moves a single image to the specified device."""
-    try:
-        image = Image.open(image_path).convert('RGB')
-    except FileNotFoundError:
-        print(f"Error: Image file not found: {image_path}")
-        return None
-    except UnidentifiedImageError:
-        print(f"Error: Could not read image file (corrupt?): {image_path}")
-        return None
-    except Exception as e:
-        print(f"Error opening image {image_path}: {e}")
-        return None
-
-    # Define transformations (must match validation transforms used during training)
-    normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                                     std=[0.229, 0.224, 0.225])
-    preprocess = transforms.Compose([
-        transforms.Resize((image_size, image_size)),
-        transforms.ToTensor(),
-        normalize,
-    ])
-
-    # Apply transformations and add batch dimension (unsqueeze(0))
-    image_tensor = preprocess(image).unsqueeze(0).to(device)
-    return image_tensor
 
 def predict_quality(model, image_tensor):
     """Predicts the quality score for a preprocessed image tensor."""

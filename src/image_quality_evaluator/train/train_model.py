@@ -23,21 +23,11 @@ from tqdm import tqdm
 import time
 import re
 import traceback
-import sys
-
-# Add project root to sys.path to allow importing from utils
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-sys.path.append(str(PROJECT_ROOT))
-
-from utils.utils import (
-    set_seed, parse_score_from_folder, ImageQualityDataset, collate_fn_skip_none,
-    get_train_transforms, get_base_transforms, SUPPORTED_EXTENSIONS
-)
 
 # --- Configuration --- 
 
 # Determine Project Root Directory dynamically
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 
 # Relative Paths (assuming 'data' and 'output' folders in project root)
 DATASET_DIR = PROJECT_ROOT / "data" / "Image_Dataset_Manual" # <--- Adjust subfolder if needed
@@ -61,6 +51,11 @@ WEIGHT_DECAY = 1e-3    # L2 regularization strength for AdamW
 SCHEDULER_FACTOR = 0.1 # Factor to reduce LR by (new_lr = lr * factor)
 SCHEDULER_PATIENCE = 3 # Epochs with no val_loss improvement before reducing LR
 SCHEDULER_MIN_LR = 1e-6  # Minimum learning rate
+
+from ..utils.utils import (
+    set_seed, parse_score_from_folder, ImageQualityDataset, collate_fn_skip_none,
+    get_train_transforms, get_base_transforms, SUPPORTED_EXTENSIONS
+)
 
 def load_data(dataset_dir):
     """Loads image paths and their corresponding scores from the dataset directory."""
@@ -234,7 +229,7 @@ def main():
     val_dataset = ImageQualityDataset(val_paths, val_scores, transform=val_transforms)
     print(f"Train dataset initialized with {len(train_dataset)} samples.") 
     print(f"Validation dataset initialized with {len(val_dataset)} samples.") 
- v
+
     # Use the custom collate_fn to handle potential loading errors
     train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True,
                               num_workers=NUM_WORKERS, pin_memory=True, collate_fn=collate_fn_skip_none)

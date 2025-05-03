@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "image-quality-evaluator"
+version = "0.1.0"
+description = "A package to train and run inference for image quality regression models."
+readme = "README.md" 
+requires-python = ">=3.8"
+license = {text = "MIT"} # Or choose another license
+authors = [
+  {name = "Ege Yavuzcan", email = "ege.yavuzcan@hotmail.com"}, 
+]
+
+
+# Define core dependencies
+dependencies = [
+    "torch",
+    "torchvision",
+    "numpy",
+    "scikit-learn",
+    "Pillow", # PIL
+    "tqdm",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/egeyavuzcan/image-quality-evaluator"
+"Bug Tracker" = "https://github.com/egeyavuzcan/image-quality-evaluator/issues"
+
+# Define command-line script entry points
+[project.scripts]
+iqe-train = "image_quality_evaluator.train.train_model:main"
+iqe-infer = "image_quality_evaluator.test.inference:main"
+
