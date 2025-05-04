@@ -9,18 +9,6 @@ Image Quality Evaluator is a deep learning-based toolkit for automatically asses
 *   Structured as an installable Python package for ease of use and dependency management.
 *   Includes data augmentation and learning rate scheduling during training.
 
-## Project Structure
-
-The project is organized as a standard Python package:
-
-
-image-quality-evaluator/ ├── src/ │ └── image_quality_evaluator/ # Main package source code │ ├── init.py │ ├── train/ # Training related modules │ │ ├── init.py │ │ └── train_model.py # Core training script │ ├── test/ # Inference related modules │ │ ├── init.py │ │ └── inference.py # Inference script │ └── utils/ # Shared utilities │ ├── init.py │ └── utils.py # Helper functions, dataset class, transforms ├── data/ # Placeholder for dataset files │ └── Image_Dataset_Manual/ # Expected dataset location │ ├── score_0_to_10/ │ │ └── image1.jpg │ ├── score_10_to_20/ │ │ └── image2.png │ └── ... # Subfolders named with score ranges ├── output/ # Default location for saved models │ └── best_quality_model.pth # Example saved model ├── pyproject.toml # Build system config, dependencies, entry points └── README.md # This file
-
-
-*   **`src/image_quality_evaluator`**: Contains all the Python source code for the package.
-*   **`data/`**: Intended location for the input image dataset. The training script expects a subfolder (e.g., `Image_Dataset_Manual`) structured with score-range folders.
-*   **`output/`**: Default directory where the trained model (`best_quality_model.pth`) is saved.
-*   **`pyproject.toml`**: Defines how to build and install the package, lists dependencies, and configures command-line scripts.
 
 ## Installation
 
@@ -33,7 +21,7 @@ image-quality-evaluator/ ├── src/ │ └── image_quality_evaluator/ #
 
 1.  **Clone the repository (optional):**
     ```bash
-    git clone <your-repository-url>
+    git clone https://github.com/egeyavuzcan/image-quality-evaluator.git
     cd image-quality-evaluator
     ```
 2.  **Install the package:**
