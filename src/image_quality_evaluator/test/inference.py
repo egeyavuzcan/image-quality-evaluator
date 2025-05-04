@@ -12,6 +12,7 @@ import torch.nn as nn
 from torchvision import models, transforms
 from PIL import Image, UnidentifiedImageError
 from pathlib import Path
+import sys
 
 # --- Configuration ---
 
@@ -19,8 +20,8 @@ from pathlib import Path
 # Assuming this script is in 'src/image_quality_evaluator/test/'
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 
-# Default path to the saved model (relative to project root)
-DEFAULT_MODEL_PATH = PROJECT_ROOT / "output" / "best_quality_model.pth"
+# Default path to the saved model (absolute path to user's model)
+DEFAULT_MODEL_PATH = Path(r"model.pth")
 
 # Model configuration (should match the trained model)
 MODEL_NAME = "resnet50"
@@ -43,10 +44,7 @@ def load_model(model_path, device):
 
     # Reconstruct the final layer structure used during training
     num_ftrs = model.fc.in_features
-    model.fc = nn.Sequential(
-        nn.Dropout(p=DROPOUT_RATE),
-        nn.Linear(num_ftrs, 1)
-    )
+    model.fc = nn.Linear(num_ftrs, 1)
 
     try:
         # Load the saved state dictionary
@@ -86,7 +84,7 @@ def predict_quality(model, image_tensor):
 
 # --- Main Execution --- 
 
-def main(args):
+def run_inference(args):
     # Setup Device
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
@@ -118,23 +116,23 @@ def main(args):
     print("\nInference finished.")
 
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(description="Predict image quality using a trained CNN model.")
-    
     parser.add_argument(
-        "image_paths", 
-        metavar="IMAGE_PATH", 
-        type=str, 
-        nargs='+', # Accept one or more image paths
+        "image_paths",
+        metavar="IMAGE_PATH",
+        type=str,
+        nargs='+',
         help="Path(s) to the input image file(s)."
     )
     parser.add_argument(
-        "-m", "--model-path", 
-        type=str, 
-        default=str(DEFAULT_MODEL_PATH), # Convert Path object to string for default
+        "-m", "--model-path",
+        type=str,
+        default=str(DEFAULT_MODEL_PATH),
         help=f"Path to the trained model .pth file (default: {DEFAULT_MODEL_PATH})"
     )
-
     args = parser.parse_args()
+    run_inference(args)
 
-    main(args)
+if __name__ == "__main__":
+    main()
