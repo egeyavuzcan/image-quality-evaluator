@@ -11,7 +11,7 @@ Image Quality Evaluator is a deep learning-based toolkit for automatically asses
 *   Python >= 3.8
 *   `pip` (Python package installer)
 
-**Note:** The following instructions rely on the `pyproject.toml` file. If it is missing, please restore it first.
+
 
 1.  🗂️ **Clone the repository (optional):**
     ```bash
