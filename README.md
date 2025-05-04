@@ -8,13 +8,16 @@ Image Quality Evaluator is a deep learning-based toolkit for automatically asses
 
 Below are example images evaluated by the model. The visual quality varies, and the model predicts a numerical quality score for each:
 
-<div align="center">
-  <img src="assets/Example_1.png" alt="Example 1" width="400" style="margin-right: 20px; display: inline-block;" />
-  <img src="assets/Example_2 dosyasının kopyası.png" alt="Example 2" width="400" style="display: inline-block;" />
-</div>
+<p align="center">
+  <img src="assets/Example_1.png" alt="Example 1" width="600" />
+  <br>
+  <b>Example 1</b>
+</p>
 
 <p align="center">
-  <b>Left: Example 1 &nbsp;|&nbsp; Right: Example 2</b>
+  <img src="assets/Example_2 dosyasının kopyası.png" alt="Example 2" width="600" />
+  <br>
+  <b>Example 2</b>
 </p>
 
 ---
