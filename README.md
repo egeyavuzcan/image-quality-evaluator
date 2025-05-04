@@ -57,23 +57,6 @@ After installing the package, you can use the command-line tools defined in `pyp
 
 ---
 
-## 🖼️ Example Results
-
-Here are some example images and their predicted quality scores:
-
-<p align="center">
-  <img src="assets/Example_1.png" alt="Example 1" width="320" />
-  <br>
-  <b>Example 1</b>
-</p>
-
-<p align="center">
-  <img src="assets/Example_2 dosyasının kopyası.png" alt="Example 2" width="320" />
-  <br>
-  <b>Example 2</b>
-</p>
-
----
 
 *   📁 Ensure your dataset is correctly placed and structured within the `data/` directory.
 *   🛠️ Run the training script from your terminal:
