@@ -1,11 +1,11 @@
-# Image Quality Evaluator
+# 🖼️ Image Quality Evaluator
 
 Image Quality Evaluator is a deep learning-based toolkit for automatically assessing the perceptual quality of images. It predicts a numerical quality score using a Convolutional Neural Network (CNN) model, fine-tuned on a custom dataset.
 
 
 
 
-## Installation
+## 🛠️ Installation
 
 **Prerequisites:**
 *   Python >= 3.8
@@ -13,12 +13,12 @@ Image Quality Evaluator is a deep learning-based toolkit for automatically asses
 
 **Note:** The following instructions rely on the `pyproject.toml` file. If it is missing, please restore it first.
 
-1.  **Clone the repository (optional):**
+1.  🗂️ **Clone the repository (optional):**
     ```bash
     git clone https://github.com/egeyavuzcan/image-quality-evaluator.git
     cd image-quality-evaluator
     ```
-2.  **Install the package:**
+2.  🛠️ **Install the package:**
     Navigate to the project's root directory (where `pyproject.toml` is located) in your terminal and run:
     ```bash
     pip install -e .
@@ -34,14 +34,14 @@ Image Quality Evaluator is a deep learning-based toolkit for automatically asses
 *   **Optimizer:** Adam optimizer (`optim.Adam`) with weight decay.
 *   **Scheduler:** `ReduceLROnPlateau` learning rate scheduler monitors the validation loss and reduces the learning rate if no improvement is seen for a set number of epochs.
 
-## Usage
+## 🚀 Usage
 
 After installing the package, you can use the command-line tools defined in `pyproject.toml`:
 
-**1. Training:**
+**1. 🏋️ Training:**
 
-*   Ensure your dataset is correctly placed and structured within the `data/` directory.
-*   Run the training script from your terminal:
+*   📁 Ensure your dataset is correctly placed and structured within the `data/` directory.
+*   🛠️ Run the training script from your terminal:
     ```bash
     iqe-train
     ```
@@ -55,9 +55,9 @@ After installing the package, you can use the command-line tools defined in `pyp
     *   Save the model with the best validation loss to the `output/` directory (default: `output/best_quality_model.pth`).
     *   Implement early stopping if validation loss doesn't improve for a defined patience period.
 
-**2. Inference:**
+**2. 🔍 Inference:**
 
-*   To predict the quality score for one or more images using a trained model:
+*   🖼️ To predict the quality score for one or more images using a trained model:
     ```bash
     iqe-infer path/to/image1.jpg path/to/image2.png ...
     ```
@@ -69,7 +69,7 @@ After installing the package, you can use the command-line tools defined in `pyp
     ```
     *   Use the `-m` or `--model-path` argument.
 
-## Dependencies
+## 📦 Dependencies
 
 Core dependencies are managed by `pyproject.toml` and installed automatically:
 
